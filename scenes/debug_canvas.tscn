@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/debug_hud.tscn" type="PackedScene" id=1]
+
+[node name="debug_canvas" type="CanvasLayer"]
+layer = 5
+
+[node name="debug_hud" parent="." instance=ExtResource( 1 )]
