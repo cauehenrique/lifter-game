@@ -3,14 +3,14 @@
 [ext_resource path="res://fonts/pixelmix_bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/debug_hud.gd" type="Script" id=2]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 4.0
 content_margin_right = 4.0
 content_margin_top = 4.0
 content_margin_bottom = 4.0
 bg_color = Color( 0, 0, 0, 0.313726 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 8
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -38,43 +38,61 @@ __meta__ = {
 [node name="panel_container" type="PanelContainer" parent="margin_container"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 72.0
-margin_bottom = 38.0
+margin_right = 85.0
+margin_bottom = 58.0
 size_flags_vertical = 0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="vbox_debug" type="VBoxContainer" parent="margin_container/panel_container"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 66.0
-margin_bottom = 32.0
+margin_right = 79.0
+margin_bottom = 52.0
 custom_constants/separation = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="current_fps_label" type="Label" parent="margin_container/panel_container/vbox_debug"]
-margin_right = 62.0
+margin_right = 75.0
 margin_bottom = 8.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "fps: 0"
 valign = 1
 
 [node name="current_scene_label" type="Label" parent="margin_container/panel_container/vbox_debug"]
 margin_top = 10.0
-margin_right = 62.0
+margin_right = 75.0
 margin_bottom = 18.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "c_scene: a"
 valign = 1
 
 [node name="node_count_label" type="Label" parent="margin_container/panel_container/vbox_debug"]
 margin_top = 20.0
-margin_right = 62.0
+margin_right = 75.0
 margin_bottom = 28.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "node_count"
+text = "node_count: 0"
+valign = 1
+
+[node name="score_label" type="Label" parent="margin_container/panel_container/vbox_debug"]
+margin_top = 30.0
+margin_right = 75.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "score: 0"
+valign = 1
+
+[node name="power_label" type="Label" parent="margin_container/panel_container/vbox_debug"]
+margin_top = 40.0
+margin_right = 75.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "power: 0"
 valign = 1

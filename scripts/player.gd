@@ -17,9 +17,13 @@ var smoke_particle : PackedScene  = load("res://scenes/smoke_particle.tscn")
 
 onready var squash_tween : Tween = $squash_tween
 onready var sprite : Sprite = $sprite
+onready var power_timer : Timer = $power_timer
 
 onready var jump_sound : AudioStreamPlayer = $jump_sound
 onready var grounded_sound : AudioStreamPlayer = $grounded_sound
+
+func _ready() -> void:
+	power_timer.connect("timeout", self, "power_timer_timeout")
 
 func _physics_process(delta: float) -> void:
 	match state:
@@ -59,6 +63,9 @@ func smoke_particles() -> void:
 	smoke_instance.restart()
 	
 	Utils.get_main_node().add_child(smoke_instance)
+
+func power_timer_timeout() -> void:
+	Global.lose_power(2)
 
 func jump() -> void:
 	velocity.y = -JUMP_FORCE

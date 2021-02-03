@@ -12,6 +12,7 @@ var gordo_corpse : PackedScene = preload("res://scenes/gordo_corpse.tscn")
 onready var hurtbox : Area2D = $hurtbox
 
 func _ready() -> void:
+	add_to_group("enemies")
 	hurtbox.connect("area_entered", self, "hurtbox_area_entered")
 	
 	var lifting_machine : Area2D = get_parent().get_node("lifting_machine")

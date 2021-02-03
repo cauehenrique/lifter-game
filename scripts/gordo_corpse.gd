@@ -10,7 +10,7 @@ onready var collision : CollisionShape2D = $collision
 onready var death_sound : AudioStreamPlayer = $death_sound
 
 func _ready() -> void:
-	Global.add_score()
+	Global.player_score += 1
 	
 	death_sound.pitch_scale = rand_range(0.8, 1)
 	death_sound.play()
