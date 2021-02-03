@@ -17,13 +17,14 @@ var smoke_particle : PackedScene  = preload("res://scenes/smoke_particle.tscn")
 var player_corpse : PackedScene = preload("res://scenes/player_corpse.tscn")
 
 onready var squash_tween : Tween = $squash_tween
-onready var sprite : Sprite = $sprite
+onready var sprite : AnimatedSprite = $sprite
 onready var power_timer : Timer = $power_timer
 
 onready var jump_sound : AudioStreamPlayer = $jump_sound
 onready var grounded_sound : AudioStreamPlayer = $grounded_sound
 
 func _ready() -> void:
+	Global.connect("game_over", self, "death")
 	power_timer.connect("timeout", self, "power_timer_timeout")
 
 func _physics_process(delta: float) -> void:
@@ -52,8 +53,21 @@ func player_state_free() -> void:
 		squash_tween.interpolate_property(sprite, "scale", Vector2(1.5, 0.5), Vector2(1, 1), 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
 		squash_tween.start()
 		
-	if grounded and Input.is_action_just_pressed("player_jump"):
-		jump()
+	if grounded:
+		if Input.is_action_just_pressed("player_jump"):
+			jump()
+		
+		if velocity.x != 0:
+			sprite.play("walk")
+			
+			if velocity.x > 0:
+				sprite.flip_h = false
+			else:
+				sprite.flip_h = true
+		else:
+			sprite.play("idle")
+	else:
+		sprite.play("jump")
 		
 	velocity.x = horizontal_input() * MOVE_SPEED
 

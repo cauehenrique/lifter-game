@@ -20,8 +20,12 @@ func _ready() -> void:
 	
 func body_entered(body : Node) -> void:
 	if body.is_in_group("enemies"):
-		print("Gordo hitted the Lifting Machine!")
-		# Put here the game over event:
+		Global.end_game()
+		
+		sprite.play("gordo")
+		power_timer.stop()
+		
+		body.queue_free()
 	else:
 		player_touching = true
 		interact_sprite.visible = true
@@ -38,12 +42,15 @@ func body_exited(body : Node) -> void:
 		player_node = null
 
 func power_timer_timeout() -> void:
-	Global.gain_power(3)
+	Global.gain_power(10)
 	
 	lift_sound.pitch_scale = rand_range(0.8, 1)
 	lift_sound.play()
 
 func _input(event: InputEvent) -> void:
+	if Global.game_over:
+		return
+	
 	if event.is_action_pressed("player_lift"):
 		if player_node != null and player_touching:
 			sprite.play("enabled")

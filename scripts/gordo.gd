@@ -10,13 +10,21 @@ var velocity : Vector2 = Vector2()
 var gordo_corpse : PackedScene = preload("res://scenes/gordo_corpse.tscn")
 
 onready var hurtbox : Area2D = $hurtbox
+onready var sprite : AnimatedSprite = $sprite
 
 func _ready() -> void:
 	add_to_group("enemies")
+	
+	Global.connect("game_over", self, "death")
 	hurtbox.connect("area_entered", self, "hurtbox_area_entered")
 	
 	var lifting_machine : Area2D = get_parent().get_node("lifting_machine")
 	move_dir = sign(int(lifting_machine.global_position.x - global_position.x))
+
+	if move_dir > 0:
+		sprite.flip_h = false
+	else:
+		sprite.flip_h = true
 
 func _physics_process(_delta: float) -> void:
 	velocity.y += GRAV_FORCE
@@ -28,6 +36,9 @@ func _physics_process(_delta: float) -> void:
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 func hurtbox_area_entered(_area : Area2D) -> void:
+	death()
+	
+func death() -> void:
 	var corpse_instance : KinematicBody2D = gordo_corpse.instance()
 	
 	corpse_instance.velocity.x = move_dir * 50.0

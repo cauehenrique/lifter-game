@@ -8,6 +8,9 @@ var gordo_scene : PackedScene = preload("res://scenes/gordo.tscn")
 func _ready() -> void:
 	spawn_timer.connect("timeout", self, "spawn_timer_timeout")
 	
+	# When the game_over signal is emitted, stops the timer.
+	Global.connect("game_over", spawn_timer, "stop")
+	
 func spawn_timer_timeout() -> void:
 	spawn_timer.wait_time = rand_range(1, 2)
 	

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://sprites/world_tileset.png" type="Texture" id=1]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/gordo.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game_over.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/camera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/lifting_machine.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game_hud.tscn" type="PackedScene" id=6]
@@ -168,11 +168,10 @@ autostart = true
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 69, 120 )
 
-[node name="gordo_2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 176, 124 )
-
 [node name="camera" parent="." instance=ExtResource( 4 )]
 
 [node name="canvas" type="CanvasLayer" parent="."]
 
 [node name="game_hud" parent="canvas" instance=ExtResource( 6 )]
+
+[node name="game_over" parent="canvas" instance=ExtResource( 3 )]
