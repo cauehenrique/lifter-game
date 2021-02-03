@@ -27,6 +27,10 @@ Utils="*res://scripts/utils.gd"
 Global="*res://scripts/global.gd"
 DebugCanvas="res://scenes/debug_canvas.tscn"
 
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
 window/size/width=160
@@ -109,6 +113,7 @@ player_lift={
 2d_physics/layer_4="dead_enemies"
 2d_physics/layer_5="hitbox"
 2d_physics/layer_6="hurtbox"
+2d_physics/layer_7="world_boundaries"
 
 [node]
 

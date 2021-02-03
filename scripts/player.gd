@@ -13,7 +13,8 @@ var state : int = PlayerStates.FREE
 var last_grounded : bool = false
 var grounded : bool = false
 
-var smoke_particle : PackedScene  = load("res://scenes/smoke_particle.tscn")
+var smoke_particle : PackedScene  = preload("res://scenes/smoke_particle.tscn")
+var player_corpse : PackedScene = preload("res://scenes/player_corpse.tscn")
 
 onready var squash_tween : Tween = $squash_tween
 onready var sprite : Sprite = $sprite
@@ -65,7 +66,18 @@ func smoke_particles() -> void:
 	Utils.get_main_node().add_child(smoke_instance)
 
 func power_timer_timeout() -> void:
-	Global.lose_power(2)
+	if Global.player_power > 0:
+		Global.lose_power(3)
+	else:
+		death()
+
+func death() -> void:
+	var corpse_instance : KinematicBody2D = player_corpse.instance()
+	
+	corpse_instance.global_position = global_position
+	
+	Utils.get_main_node().call_deferred("add_child", corpse_instance)
+	queue_free()
 
 func jump() -> void:
 	velocity.y = -JUMP_FORCE

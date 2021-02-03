@@ -8,8 +8,9 @@ var player_node : KinematicBody2D
 onready var interact_sprite : Sprite = $interact_sprite
 onready var sprite : AnimatedSprite = $sprite
 onready var power_timer : Timer = $power_timer
+onready var lift_sound : AudioStreamPlayer = $lift_sound
 
-export (PackedScene) var player_scene : PackedScene
+var player_scene : PackedScene = preload("res://scenes/player.tscn")
 
 func _ready() -> void:
 	connect("body_entered", self, "body_entered")
@@ -38,6 +39,9 @@ func body_exited(body : Node) -> void:
 
 func power_timer_timeout() -> void:
 	Global.gain_power(3)
+	
+	lift_sound.pitch_scale = rand_range(0.8, 1)
+	lift_sound.play()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("player_lift"):
