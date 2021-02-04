@@ -15,7 +15,7 @@ onready var sprite : AnimatedSprite = $sprite
 func _ready() -> void:
 	add_to_group("enemies")
 	
-	Global.connect("game_over", self, "death")
+	Global.connect("game_over", self, "queue_free")
 	hurtbox.connect("area_entered", self, "hurtbox_area_entered")
 	
 	var lifting_machine : Area2D = get_parent().get_node("lifting_machine")

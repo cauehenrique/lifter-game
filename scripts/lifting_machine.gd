@@ -1,8 +1,9 @@
 extends Area2D
 
-var player_touching : bool = false
-var lift_active : bool = false
+enum LiftStates { DISABLED, ENABLED, GORDO }
+var state : int = LiftStates.DISABLED
 
+var player_touching : bool = false
 var player_node : KinematicBody2D
 
 onready var interact_sprite : Sprite = $interact_sprite
@@ -20,25 +21,25 @@ func _ready() -> void:
 	
 func body_entered(body : Node) -> void:
 	if body.is_in_group("enemies"):
+		# Global will emmit the "game_over" signal.
 		Global.end_game()
 		
+		# Node related stuff:
 		sprite.play("gordo")
 		power_timer.stop()
-		
 		body.queue_free()
+		
+		# This state doesn't have anything in it.
+		# And it's going to be perfect, because we don't want
+		# the lift_machine to do nothing when the game is already over.
+		state = LiftStates.GORDO
 	else:
-		player_touching = true
-		interact_sprite.visible = true
-		
 		player_node = body
-		
+		player_touching = true
+	
 func body_exited(body : Node) -> void:
 	if not body.is_in_group("enemies"):
 		player_touching = false
-		
-		if not lift_active:
-			interact_sprite.visible = false
-		
 		player_node = null
 
 func power_timer_timeout() -> void:
@@ -48,29 +49,26 @@ func power_timer_timeout() -> void:
 	lift_sound.play()
 
 func _input(event: InputEvent) -> void:
-	if Global.game_over:
-		return
-	
+	# Finally, I got rid of the "creating a clone" bug!
 	if event.is_action_pressed("player_lift"):
-		if player_node != null and player_touching:
-			sprite.play("enabled")
+		match state:
+			LiftStates.DISABLED:
+				if player_touching and player_node != null:
+					player_node.queue_free()
+					player_node = null
+					
+					sprite.play("enabled")
+					power_timer.start()
+					
+					state = LiftStates.ENABLED
 			
-			lift_active = true
-			power_timer.start()
-			
-			player_node.queue_free()
-			player_node = null
-			
-		elif lift_active:
-			sprite.play("disabled")
-			
-			lift_active = false
-			power_timer.stop()
-			
-			player_node = null
-			
-			# Takes care of spawning the player:
-			var player_instance : KinematicBody2D = player_scene.instance()
-			
-			player_instance.global_position = global_position
-			Utils.get_main_node().add_child(player_instance)
+			LiftStates.ENABLED:
+				var player_instance : KinematicBody2D = player_scene.instance()
+				player_instance.global_position = global_position
+				
+				Utils.get_main_node().add_child(player_instance)
+				
+				sprite.play("disabled")
+				power_timer.stop()
+				
+				state = LiftStates.DISABLED
