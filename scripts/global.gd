@@ -21,10 +21,10 @@ func set_power(new_power : int) -> void:
 	emit_signal("player_power_changed", player_power)
 
 func lose_power(amount : int) -> void:
-	set_power(max(player_power - amount, 0))
+	set_power(int(max(player_power - amount, 0)))
 
 func gain_power(amount : int) -> void:
-	set_power(min(player_power + amount, 100))
+	set_power(int(min(player_power + amount, 100)))
 
 func reset_values() -> void:
 	game_over = false
