@@ -2,7 +2,7 @@
 
 ## Essentials
 - [ ] Work on **the bug found by a lot of players**, you know what I'm talking about.
-    - [ ] Make a better code on `lift_machine`, and what I mean by saying that? Make a fucking state machine you dumbass.
+    - [X] Make a better code on `lift_machine`, and what I mean by saying that? Make a fucking state machine you dumbass.
     - [ ] Try not to use `_process`.
 - [ ] Put more impact when a `gordo` walks.
     - [ ] `smoke_particles` when they step.
