@@ -1,9 +1,9 @@
 # What do I need to do?
 
 ## Essentials
-- [ ] Work on **the bug found by a lot of players**, you know what I'm talking about.
+- [X] Work on **the bug found by a lot of players**, you know what I'm talking about.
     - [X] Make a better code on `lift_machine`, and what I mean by saying that? Make a fucking state machine you dumbass.
-    - [ ] Try not to use `_process`.
+    - [X] Try not to use `_process`.
 - [ ] Put more impact when a `gordo` walks.
     - [ ] `smoke_particles` when they step.
     - [ ] A little bit of screen-shake to make the player feel the impact on ground.
