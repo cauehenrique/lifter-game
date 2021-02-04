@@ -20,14 +20,21 @@ func _ready() -> void:
 	power_timer.connect("timeout", self, "power_timer_timeout")
 	
 func body_entered(body : Node) -> void:
+	if not Global.game_start:
+		return
+	
 	if body.is_in_group("enemies"):
 		# Global will emmit the "game_over" signal.
-		Global.end_game()
 		
 		# Node related stuff:
 		sprite.play("gordo")
 		power_timer.stop()
 		body.queue_free()
+		
+		# For some reason, if I don't put this boy down here, the "gordo"
+		# spawns an corpse inside the "lifting_machine"...
+		yield(get_tree(), "idle_frame")
+		Global.end_game()
 		
 		# This state doesn't have anything in it.
 		# And it's going to be perfect, because we don't want
@@ -36,11 +43,20 @@ func body_entered(body : Node) -> void:
 	else:
 		player_node = body
 		player_touching = true
+		
+		if state == LiftStates.DISABLED:
+			interact_sprite.visible = true
 	
 func body_exited(body : Node) -> void:
+	if not Global.game_start:
+		return
+	
 	if not body.is_in_group("enemies"):
 		player_touching = false
 		player_node = null
+		
+		if state == LiftStates.DISABLED:
+			interact_sprite.visible = false
 
 func power_timer_timeout() -> void:
 	Global.gain_power(10)

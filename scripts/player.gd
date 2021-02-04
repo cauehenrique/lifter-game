@@ -25,9 +25,10 @@ onready var grounded_sound : AudioStreamPlayer = $grounded_sound
 
 func _ready() -> void:
 	Global.connect("game_over", self, "death")
+	
 	power_timer.connect("timeout", self, "power_timer_timeout")
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void:	
 	match state:
 		PlayerStates.FREE: player_state_free()
 	
@@ -52,11 +53,18 @@ func player_state_free() -> void:
 		
 		squash_tween.interpolate_property(sprite, "scale", Vector2(1.5, 0.5), Vector2(1, 1), 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
 		squash_tween.start()
-		
+	
+	animate_sprite()
+	
+	if not Global.game_start:
+		return
+	
+	velocity.x = horizontal_input() * MOVE_SPEED
+	if Input.is_action_just_pressed("player_jump") and grounded:
+		jump()
+
+func animate_sprite() -> void:
 	if grounded:
-		if Input.is_action_just_pressed("player_jump"):
-			jump()
-		
 		if velocity.x != 0:
 			sprite.play("walk")
 			
@@ -68,8 +76,6 @@ func player_state_free() -> void:
 			sprite.play("idle")
 	else:
 		sprite.play("jump")
-		
-	velocity.x = horizontal_input() * MOVE_SPEED
 
 func smoke_particles() -> void:
 	var smoke_instance : CPUParticles2D = smoke_particle.instance()
@@ -80,6 +86,9 @@ func smoke_particles() -> void:
 	Utils.get_main_node().add_child(smoke_instance)
 
 func power_timer_timeout() -> void:
+	if not Global.game_start:
+		return
+	
 	if Global.player_power > 0:
 		Global.lose_power(3)
 	else:

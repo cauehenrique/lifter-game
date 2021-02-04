@@ -138,9 +138,11 @@ autowrap = true
 
 [node name="restart_label" type="Label" parent="center_container/v_box_container"]
 visible = false
+margin_top = 46.0
 margin_right = 128.0
-margin_bottom = 8.0
+margin_bottom = 54.0
 rect_min_size = Vector2( 128, 0 )
+rect_scale = Vector2( 0.8, 1.2 )
 rect_pivot_offset = Vector2( 64, 4 )
 custom_fonts/font = SubResource( 1 )
 text = "aperta \"R\""

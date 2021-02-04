@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const MOVE_SPEED : float = 20.0
+const MOVE_SPEED : float = 25.0
 const JUMP_FORCE : float = 150.0
 const GRAV_FORCE : float = 15.0
 
@@ -15,7 +15,7 @@ onready var sprite : AnimatedSprite = $sprite
 func _ready() -> void:
 	add_to_group("enemies")
 	
-	Global.connect("game_over", self, "queue_free")
+	Global.connect("game_over", self, "death")
 	hurtbox.connect("area_entered", self, "hurtbox_area_entered")
 	
 	var lifting_machine : Area2D = get_parent().get_node("lifting_machine")
@@ -37,11 +37,11 @@ func _physics_process(_delta: float) -> void:
 
 func hurtbox_area_entered(_area : Area2D) -> void:
 	death()
-	
+
 func death() -> void:
 	var corpse_instance : KinematicBody2D = gordo_corpse.instance()
 	
-	corpse_instance.velocity.x = move_dir * 50.0
+	corpse_instance.velocity.x = move_dir * floor(rand_range(10.0, 50.0))
 	corpse_instance.global_position = global_position
 	
 	Utils.get_main_node().call_deferred("add_child", corpse_instance)

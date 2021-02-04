@@ -2,11 +2,23 @@ extends Node
 
 signal player_power_changed(new_power)
 signal player_score_changed(new_score)
+
+signal game_start()
 signal game_over()
+
+signal dark_mode(is_dark)
 
 var player_score : int = 0 setget set_score
 var player_power : int = 100 setget set_power
+
+var game_start : bool = false
 var game_over : bool = false
+
+var dark_mode : bool = false setget set_dark_mode
+
+func start_game() -> void:
+	emit_signal("game_start")
+	game_start = true
 
 func end_game() -> void:
 	emit_signal("game_over")
@@ -26,7 +38,13 @@ func lose_power(amount : int) -> void:
 func gain_power(amount : int) -> void:
 	set_power(int(min(player_power + amount, 100)))
 
+func set_dark_mode(is_dark : bool) -> void:
+	dark_mode = is_dark
+	emit_signal("dark_mode", dark_mode)
+
 func reset_values() -> void:
+	game_start = false
 	game_over = false
+	
 	player_score = 0
 	player_power = 100

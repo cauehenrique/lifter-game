@@ -36,11 +36,11 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=160
 window/size/height=160
-window/size/resizable=false
 window/size/test_width=640
 window/size/test_height=640
 window/vsync/use_vsync=false
 window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [importer_defaults]
 
