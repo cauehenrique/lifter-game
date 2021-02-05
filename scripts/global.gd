@@ -14,8 +14,12 @@ var player_power : int = 100 setget set_power
 var game_start : bool = false
 var game_over : bool = false
 
-var best_score : int = 0
-var last_score : int = 0
+var last_sound_db : float = 10.0
+var last_music_db : float = 10.0
+
+# TODO: Save the score locally.
+#var best_score : int = 0
+#var last_score : int = 0
 
 var dark_mode : bool = false setget set_dark_mode
 

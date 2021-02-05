@@ -1,14 +1,58 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://fonts/game_default_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://sprites/power_arm.png" type="Texture" id=2]
 [ext_resource path="res://scripts/game_start.gd" type="Script" id=3]
+[ext_resource path="res://sprites/gui_buttons/slider_grabber_normal.png" type="Texture" id=4]
+[ext_resource path="res://sprites/gui_buttons/slider_grabber_active.png" type="Texture" id=5]
+[ext_resource path="res://sounds/sound_blip.wav" type="AudioStream" id=6]
+
+[sub_resource type="StyleBoxFlat" id=9]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.466667, 0.466667, 0.466667, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.466667, 0.466667, 0.466667, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+anti_aliasing = false
 
 [sub_resource type="Animation" id=1]
 resource_name = "go_away"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("center_container:rect_position")
+tracks/0/path = NodePath("title_center:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -45,6 +89,18 @@ tracks/2/keys = {
 "method": "queue_free"
 } ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("volumes_margin:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [node name="game_start" type="Control"]
 anchor_right = 1.0
@@ -62,22 +118,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="center_container" type="CenterContainer" parent="."]
+[node name="title_center" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="v_box_container" type="VBoxContainer" parent="center_container"]
+[node name="title_vbox" type="VBoxContainer" parent="title_center"]
 margin_left = 21.0
-margin_top = 68.0
+margin_top = 70.0
 margin_right = 138.0
-margin_bottom = 92.0
-custom_constants/separation = 8
+margin_bottom = 90.0
 alignment = 1
 
-[node name="title_hbox" type="HBoxContainer" parent="center_container/v_box_container"]
+[node name="title_hbox" type="HBoxContainer" parent="title_center/title_vbox"]
 margin_right = 117.0
 margin_bottom = 8.0
 custom_constants/separation = 4
@@ -86,13 +142,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="left_arm" type="TextureRect" parent="center_container/v_box_container/title_hbox"]
+[node name="left_arm" type="TextureRect" parent="title_center/title_vbox/title_hbox"]
 margin_left = 29.0
 margin_right = 37.0
 margin_bottom = 8.0
 texture = ExtResource( 2 )
 
-[node name="game_title" type="Label" parent="center_container/v_box_container/title_hbox"]
+[node name="game_title" type="Label" parent="title_center/title_vbox/title_hbox"]
 margin_left = 41.0
 margin_right = 75.0
 margin_bottom = 8.0
@@ -104,17 +160,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="right_arm" type="TextureRect" parent="center_container/v_box_container/title_hbox"]
+[node name="right_arm" type="TextureRect" parent="title_center/title_vbox/title_hbox"]
 margin_left = 79.0
 margin_right = 87.0
 margin_bottom = 8.0
 texture = ExtResource( 2 )
 flip_h = true
 
-[node name="start_label" type="Label" parent="center_container/v_box_container"]
-margin_top = 16.0
+[node name="start_label" type="Label" parent="title_center/title_vbox"]
+margin_top = 12.0
 margin_right = 117.0
-margin_bottom = 24.0
+margin_bottom = 20.0
 custom_fonts/font = ExtResource( 1 )
 text = "press down to start"
 align = 1
@@ -122,6 +178,88 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="volumes_margin" type="MarginContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -52.0
+mouse_filter = 1
+custom_constants/margin_right = 32
+custom_constants/margin_top = 16
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="volumes_vbox" type="VBoxContainer" parent="volumes_margin"]
+margin_left = 32.0
+margin_top = 16.0
+margin_right = 128.0
+margin_bottom = 36.0
+custom_constants/separation = 0
+
+[node name="sound_hbox" type="HBoxContainer" parent="volumes_margin/volumes_vbox"]
+margin_right = 96.0
+margin_bottom = 10.0
+alignment = 1
+
+[node name="sound_label" type="Label" parent="volumes_margin/volumes_vbox/sound_hbox"]
+margin_top = 1.0
+margin_right = 34.0
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 1 )
+text = "sound:"
+
+[node name="sound_slider" type="HSlider" parent="volumes_margin/volumes_vbox/sound_hbox"]
+margin_left = 38.0
+margin_right = 96.0
+margin_bottom = 10.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_icons/grabber_highlight = ExtResource( 5 )
+custom_icons/grabber = ExtResource( 4 )
+custom_styles/slider = SubResource( 9 )
+custom_styles/grabber_area_highlight = SubResource( 10 )
+custom_styles/grabber_area = SubResource( 11 )
+max_value = 10.0
+value = 10.0
+rounded = true
+scrollable = false
+
+[node name="test_sound" type="AudioStreamPlayer" parent="volumes_margin/volumes_vbox/sound_hbox"]
+stream = ExtResource( 6 )
+bus = "Sound"
+
+[node name="music_hbox" type="HBoxContainer" parent="volumes_margin/volumes_vbox"]
+margin_top = 10.0
+margin_right = 96.0
+margin_bottom = 20.0
+alignment = 1
+
+[node name="music_label" type="Label" parent="volumes_margin/volumes_vbox/music_hbox"]
+margin_top = 1.0
+margin_right = 33.0
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 1 )
+text = "music:"
+
+[node name="music_slider" type="HSlider" parent="volumes_margin/volumes_vbox/music_hbox"]
+margin_left = 37.0
+margin_right = 96.0
+margin_bottom = 10.0
+focus_mode = 0
+size_flags_horizontal = 3
+custom_icons/grabber_highlight = ExtResource( 5 )
+custom_icons/grabber = ExtResource( 4 )
+custom_styles/slider = SubResource( 7 )
+custom_styles/grabber_area_highlight = SubResource( 8 )
+custom_styles/grabber_area = SubResource( 6 )
+max_value = 10.0
+value = 10.0
+rounded = true
+scrollable = false
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
 anims/go_away = SubResource( 1 )
