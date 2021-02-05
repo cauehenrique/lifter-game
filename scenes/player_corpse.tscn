@@ -22,3 +22,4 @@ shape = SubResource( 1 )
 
 [node name="death_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+bus = "Sound"

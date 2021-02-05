@@ -10,6 +10,7 @@ onready var death_sound : AudioStreamPlayer = $death_sound
 onready var free_timer : Timer = $free_timer
 
 func _ready() -> void:
+	Utils.get_main_camera().shake(2, 0.3)
 	Global.player_score += 1
 	
 	death_sound.pitch_scale = rand_range(0.8, 1)

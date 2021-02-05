@@ -14,6 +14,9 @@ var player_power : int = 100 setget set_power
 var game_start : bool = false
 var game_over : bool = false
 
+var best_score : int = 0
+var last_score : int = 0
+
 var dark_mode : bool = false setget set_dark_mode
 
 func start_game() -> void:

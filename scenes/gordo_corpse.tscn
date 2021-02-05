@@ -22,6 +22,7 @@ shape = SubResource( 1 )
 
 [node name="death_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+bus = "Sound"
 
 [node name="free_timer" type="Timer" parent="."]
 wait_time = 10.0

@@ -13,6 +13,6 @@
 - [ ] Basic save and load system.
 
 ## Sound
-- [ ] Find more ways of giving the player feedback with sound.
+- [X] Find more ways of giving the player feedback with sound.
 - [ ] Start thinking about game's music.
-- [ ] Mute music and sound buttons on the title screen.
+- [X] Mute music and sound buttons on the title screen.
