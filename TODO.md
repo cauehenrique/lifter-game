@@ -8,9 +8,9 @@
     - [X] `smoke_particles` when they step.
     - [X] A little bit of screen-shake to make the player feel the impact on ground.
 - [ ] ~~More game modes, by now, "Easy", "Medium", "Hard"~~
-- [ ] Better "Game Over", also, it's important to show the player the `best_score` and `last_score` at this screen.
+- [X] Better "Game Over", also, it's important to show the player the `best_score` and `last_score` at this screen.
 - [X] Find a better way of showing the action key above the `lifting_machine`.
-- [ ] Basic save and load system.
+- [X] Basic save and load system. ~~Basic o caralho, chato pra porra!~~
 
 ## Sound
 - [X] Find more ways of giving the player feedback with sound.
