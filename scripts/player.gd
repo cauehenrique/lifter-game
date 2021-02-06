@@ -92,7 +92,7 @@ func power_timer_timeout() -> void:
 	if not Global.game_start:
 		return
 	
-	Global.lose_power(5)
+	Global.lose_power(3)
 
 func death() -> void:
 	var corpse_instance : KinematicBody2D = player_corpse.instance()
