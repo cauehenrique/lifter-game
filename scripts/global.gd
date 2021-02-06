@@ -17,17 +17,57 @@ var game_over : bool = false
 var last_sound_db : float = 10.0
 var last_music_db : float = 10.0
 
-# TODO: Save the score locally.
-#var best_score : int = 0
-#var last_score : int = 0
-
 var dark_mode : bool = false setget set_dark_mode
+
+# Save and Load stuff:
+const SAVE_PATH : String = "user://save.dat"
+var best_score : int = 0
+var last_score : int = 0
+
+func _ready() -> void:
+	load_progress()
+
+func save_progress() -> void:
+	var data : Dictionary = {
+		"best_score": best_score,
+		"last_score": last_score
+	}
+	
+	var file : File = File.new()
+	
+	var error : int = file.open(SAVE_PATH, File.WRITE)
+	if error == OK:
+		file.store_var(data)
+		file.close()
+	
+	print("Saved Progress: " + str(last_score) + " | " + str(best_score))
+
+func load_progress() -> void:
+	var file : File = File.new()
+	if file.file_exists(SAVE_PATH):
+		var error : int = file.open(SAVE_PATH, File.READ)
+		if error == OK:
+			var player_data : Dictionary = file.get_var()
+			
+			last_score = player_data.last_score
+			best_score = player_data.best_score
+			
+			file.close()
+			
+			print("Loaded Progress: " + str(last_score) + " | " + str(best_score))
 
 func start_game() -> void:
 	emit_signal("game_start")
 	game_start = true
 
 func end_game() -> void:
+	last_score = player_score
+	if last_score > best_score:
+		print("Last Score > Best Score")
+		best_score = last_score
+	
+	save_progress()
+	
 	emit_signal("game_over")
 	game_over = true
 

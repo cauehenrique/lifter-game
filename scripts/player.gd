@@ -41,6 +41,9 @@ func horizontal_input() -> int:
 	return int(Input.is_action_pressed("player_right")) - int(Input.is_action_pressed("player_left"))
 	
 func player_state_free() -> void:
+	if Global.player_power <= 0:
+		death()
+	
 	velocity.y += GRAV_FORCE
 	
 	# Just grounded:
@@ -89,10 +92,7 @@ func power_timer_timeout() -> void:
 	if not Global.game_start:
 		return
 	
-	if Global.player_power > 0:
-		Global.lose_power(3)
-	else:
-		death()
+	Global.lose_power(5)
 
 func death() -> void:
 	var corpse_instance : KinematicBody2D = player_corpse.instance()

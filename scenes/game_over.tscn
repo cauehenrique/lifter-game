@@ -12,7 +12,7 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "game_over"
-length = 1.2
+length = 2.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("center_container/v_box_container/gordo_label:visible")
 tracks/0/interp = 1
@@ -44,7 +44,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 1.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -57,7 +57,7 @@ tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0.5, 0.6 ),
-"transitions": PoolRealArray( -0.5, -0.5 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
 "update": 0,
 "values": [ Vector2( 0.8, 1.2 ), Vector2( 1, 1 ) ]
 }
@@ -68,8 +68,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 1, 1.1 ),
-"transitions": PoolRealArray( 1, -0.5 ),
+"times": PoolRealArray( 1.6, 1.7 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
 "update": 0,
 "values": [ Vector2( 0.8, 1.2 ), Vector2( 1, 1 ) ]
 }
@@ -88,8 +88,36 @@ tracks/5/keys = {
 "end_offset": 0.0,
 "start_offset": 0.0,
 "stream": ExtResource( 3 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
 } ],
-"times": PoolRealArray( 0.5, 1 )
+"times": PoolRealArray( 0.5, 1, 1.6 )
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("center_container/v_box_container/score_vbox:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("center_container/v_box_container/score_vbox:rect_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 1, 1.1 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ Vector2( 0.8, 1.2 ), Vector2( 1, 1 ) ]
 }
 
 [node name="game_over" type="Control"]
@@ -131,21 +159,54 @@ rect_min_size = Vector2( 128, 0 )
 rect_scale = Vector2( 0.8, 1.2 )
 rect_pivot_offset = Vector2( 64, 15 )
 custom_fonts/font = SubResource( 1 )
-text = "gordao pegou teu lugar no supino reto, ai eh foda"
+text = "someone got your sit on the bench press, lol!"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="score_vbox" type="VBoxContainer" parent="center_container/v_box_container"]
+visible = false
+margin_top = 46.0
+margin_right = 128.0
+margin_bottom = 66.0
+rect_scale = Vector2( 0.8, 1.2 )
+rect_pivot_offset = Vector2( 64, 10 )
+custom_constants/separation = 4
+alignment = 1
+
+[node name="last_score_label" type="Label" parent="center_container/v_box_container/score_vbox"]
+margin_right = 128.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 128, 0 )
+rect_pivot_offset = Vector2( 64, 4 )
+custom_fonts/font = SubResource( 1 )
+text = "last score: 0"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="best_score_label" type="Label" parent="center_container/v_box_container/score_vbox"]
+margin_top = 12.0
+margin_right = 128.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 128, 0 )
+rect_pivot_offset = Vector2( 64, 4 )
+custom_fonts/font = SubResource( 1 )
+text = "best score: 0"
 align = 1
 valign = 1
 autowrap = true
 
 [node name="restart_label" type="Label" parent="center_container/v_box_container"]
 visible = false
-margin_top = 46.0
+margin_top = 82.0
 margin_right = 128.0
-margin_bottom = 54.0
+margin_bottom = 90.0
 rect_min_size = Vector2( 128, 0 )
 rect_scale = Vector2( 0.8, 1.2 )
 rect_pivot_offset = Vector2( 64, 4 )
 custom_fonts/font = SubResource( 1 )
-text = "aperta \"R\""
+text = "press \"R\" to restart!"
 align = 1
 valign = 1
 autowrap = true

@@ -26,8 +26,6 @@ func _input(event: InputEvent) -> void:
 		get_tree().set_input_as_handled()
 
 func change_sound_volume(new_value : float) -> void:
-	print("Sound Slider changed: " + str(new_value))
-	
 	Global.last_sound_db = new_value
 	
 	AudioServer.set_bus_mute(sound_bus_idx, (new_value <= 0))
@@ -36,8 +34,6 @@ func change_sound_volume(new_value : float) -> void:
 	sound_blip.play()
 
 func change_music_volume(new_value : float) -> void:
-	print("Music Slider changed: " + str(new_value))
-	
 	Global.last_music_db = new_value
 	
 	AudioServer.set_bus_mute(music_bus_idx, (new_value <= 0))

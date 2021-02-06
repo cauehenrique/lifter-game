@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://sprites/world_tileset.png" type="Texture" id=1]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://scenes/lifting_machine.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game_hud.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/enemy_spawner.gd" type="Script" id=7]
-[ext_resource path="res://scenes/invert_rect.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/game_start.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -178,5 +177,3 @@ position = Vector2( 69, 120 )
 [node name="game_over" parent="canvas" instance=ExtResource( 3 )]
 
 [node name="game_start" parent="canvas" instance=ExtResource( 9 )]
-
-[node name="invert_rect" parent="canvas" instance=ExtResource( 8 )]

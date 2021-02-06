@@ -43,7 +43,7 @@ func hurtbox_area_entered(_area : Area2D) -> void:
 	death()
 
 func step_timer_timeout() -> void:
-	Utils.get_main_camera().shake(0.5, 0.3)
+	Utils.get_main_camera().shake(1, 0.2)
 	smoke_particles()
 	
 	step_sound.pitch_scale = rand_range(0.6, 1.2)
