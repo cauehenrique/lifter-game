@@ -7,12 +7,12 @@
 [ext_resource path="res://sprites/gui_buttons/slider_grabber_active.png" type="Texture" id=5]
 [ext_resource path="res://sounds/sound_blip.wav" type="AudioStream" id=6]
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=1]
 content_margin_top = 2.0
 content_margin_bottom = 2.0
 bg_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.466667, 0.466667, 0.466667, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -20,19 +20,19 @@ border_width_bottom = 1
 border_color = Color( 0, 0, 0, 1 )
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_bottom = 1
 border_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=4]
 content_margin_top = 2.0
 content_margin_bottom = 2.0
 bg_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.466667, 0.466667, 0.466667, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -48,8 +48,7 @@ border_width_bottom = 1
 border_color = Color( 0, 0, 0, 1 )
 anti_aliasing = false
 
-[sub_resource type="Animation" id=1]
-resource_name = "go_away"
+[sub_resource type="Animation" id=7]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("title_center:rect_position")
@@ -220,12 +219,12 @@ focus_mode = 0
 size_flags_horizontal = 3
 custom_icons/grabber_highlight = ExtResource( 5 )
 custom_icons/grabber = ExtResource( 4 )
-custom_styles/slider = SubResource( 9 )
-custom_styles/grabber_area_highlight = SubResource( 10 )
-custom_styles/grabber_area = SubResource( 11 )
-max_value = 10.0
-value = 10.0
-rounded = true
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area_highlight = SubResource( 2 )
+custom_styles/grabber_area = SubResource( 3 )
+max_value = 1.0
+step = 0.1
+value = 1.0
 scrollable = false
 
 [node name="test_sound" type="AudioStreamPlayer" parent="volumes_margin/volumes_vbox/sound_hbox"]
@@ -253,13 +252,13 @@ focus_mode = 0
 size_flags_horizontal = 3
 custom_icons/grabber_highlight = ExtResource( 5 )
 custom_icons/grabber = ExtResource( 4 )
-custom_styles/slider = SubResource( 7 )
-custom_styles/grabber_area_highlight = SubResource( 8 )
+custom_styles/slider = SubResource( 4 )
+custom_styles/grabber_area_highlight = SubResource( 5 )
 custom_styles/grabber_area = SubResource( 6 )
-max_value = 10.0
-value = 10.0
-rounded = true
+max_value = 1.0
+step = 0.1
+value = 1.0
 scrollable = false
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
-anims/go_away = SubResource( 1 )
+anims/go_away = SubResource( 7 )

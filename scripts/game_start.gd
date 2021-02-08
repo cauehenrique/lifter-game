@@ -9,7 +9,7 @@ onready var sound_blip : AudioStreamPlayer = $volumes_margin/volumes_vbox/sound_
 var music_bus_idx : int = AudioServer.get_bus_index("Music")
 var sound_bus_idx : int = AudioServer.get_bus_index("Sound")
 
-const MUSIC_START_DB : int = 12
+const MUSIC_START_DB : int = 5
 
 func _ready() -> void:
 	sound_slider.value = Global.last_sound_db
@@ -29,7 +29,7 @@ func change_sound_volume(new_value : float) -> void:
 	Global.last_sound_db = new_value
 	
 	AudioServer.set_bus_mute(sound_bus_idx, (new_value <= 0))
-	AudioServer.set_bus_volume_db(sound_bus_idx, (new_value - 10))
+	AudioServer.set_bus_volume_db(sound_bus_idx, linear2db(new_value))
 	
 	sound_blip.play()
 
@@ -37,4 +37,4 @@ func change_music_volume(new_value : float) -> void:
 	Global.last_music_db = new_value
 	
 	AudioServer.set_bus_mute(music_bus_idx, (new_value <= 0))
-	AudioServer.set_bus_volume_db(music_bus_idx, (new_value - 10) - MUSIC_START_DB)
+	AudioServer.set_bus_volume_db(music_bus_idx, linear2db(new_value) - MUSIC_START_DB)
